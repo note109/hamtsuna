@@ -56,7 +56,7 @@ This bot demonstrates many of the core features of Botkit:
 var Botkit = require('Botkit');
 
 
-if (!process.env.token) {
+if (!process.env.TOKEN) {
   console.log('Error: Specify token in environment');
   process.exit(1);
 }
@@ -67,7 +67,7 @@ var controller = Botkit.slackbot({
 });
 
 controller.spawn({
-  token: process.env.token
+  token: process.env.TOKEN
 }).startRTM(function(err) {
   if (err) {
     throw new Error(err);
