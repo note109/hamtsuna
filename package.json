@@ -2,9 +2,9 @@
   "name": "hamtsuna",
   "version": "0.0.1",
   "description": "slack bot",
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bot.js"
   },
   "repository": {
     "type": "git",
@@ -14,5 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "botkit": "0.0.5"
+  },
+  "engines": {
+    "node": "4.2.1"
   }
 }
