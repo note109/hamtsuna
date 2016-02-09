@@ -4,7 +4,7 @@
   "description": "slack bot",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "npm install && node bot.js"
   },
   "repository": {
     "type": "git",
