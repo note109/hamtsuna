@@ -61,9 +61,14 @@ if (!process.env.token) {
   process.exit(1);
 }
 
+var redis_storage = require('./node_modules/botkit/lib/storage/redis_storage.js')({
+  url: process.env.REDIS_URL
+});
+
 var controller = Botkit.slackbot({
- debug: false,
- log: false
+  debug: false,
+  log: false,
+  storage: redis_storage
 });
 
 controller.spawn({
