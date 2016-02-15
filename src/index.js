@@ -3,6 +3,8 @@ var controller = App.controller;
 var slack = require('./slack');
 var storage = require('./storage');
 
+require('./twitter');
+
 controller.hears(['覚えて'], 'direct_mention,mention', function(bot, message) {
   var pureText = message.text.replace(/覚えて\s/, "")
   var obj = {id: message.user, memories: pureText}
