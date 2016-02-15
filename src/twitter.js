@@ -35,8 +35,3 @@ stream.on('tweet', function (tweet) {
     }
   );
 })
-
-module.exports = {
-  controller: controller,
-  bot: bot
-}
