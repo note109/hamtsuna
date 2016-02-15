@@ -2,7 +2,7 @@ var App = require('./app');
 var controller = App.controller;
 var bot = App.bot;
 var Twit = require('twit')
-var PRIVACY = require('../config/privacy.json');
+var PRIVACY = JSON.parse(process.env.PRIVACY) || require('../config/privacy.json');
 var T = new Twit({
   consumer_key:        process.env.CONSUMER_KEY,
   consumer_secret:     process.env.CONSUMER_SECRET,
