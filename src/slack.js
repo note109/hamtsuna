@@ -1,18 +1,17 @@
-var App = require('./app');
-var bot = App.bot;
-var controller = App.controller;
-var storage = require('./storage');
+let App = require('./app');
+let bot = App.bot;
+let controller = App.controller;
+let storage = require('./storage');
 
-var Slack = {
+let Slack = {
 
-  getChannelName: function (channelId) {
-    var that = this;
-    return new Promise(function (resolve, reject) {
-      that._fetchChannelData().then(function (channels) {
+  getChannelName: (channelId) => {
+    return new Promise((resolve, reject) => {
+      this._fetchChannelData().then((channels) => {
         if (channels[channelId]) {
           resolve(channels[channelId]);
         } else {
-          that._fetchChannelsDataFromApi().then(function (data) {
+          this._fetchChannelsDataFromApi().then((data) => {
             resolve(data[channelId]);
           })
         }
@@ -20,14 +19,13 @@ var Slack = {
     })
   },
 
-  _fetchChannelData: function () {
-    var that = this;
-    return new Promise(function (resolve, reject) {
-      storage._fetchChannelsData().then(function (data) {
+  _fetchChannelData: () => {
+    return new Promise((resolve, reject) => {
+      storage._fetchChannelsData().then((data) => {
         if (data) {
           resolve(data);
         } else {
-          that._fetchChannelsDataFromApi().then(function (data) {
+          this._fetchChannelsDataFromApi().then((data) => {
             resolve(data);
           })
         }
@@ -35,14 +33,14 @@ var Slack = {
     })
   },
 
-  _fetchChannelsDataFromApi: function () {
-    return new Promise(function (resolve, reject) {
-      bot.api.channels.list({}, function(err, response) {
-        var obj = {id: "channels"}
-        response.channels.forEach(function(channel) {
+  _fetchChannelsDataFromApi: () => {
+    return new Promise((resolve, reject) => {
+      bot.api.channels.list({}, (err, response) => {
+        let obj = {id: "channels"}
+        response.channels.forEach((channel) => {
           obj[channel.id] = channel.name
         })
-        controller.storage.teams.save(obj, function (err) { console.log(err) })
+        controller.storage.teams.save(obj, (err) => { console.log(err) })
         resolve(obj); // id: "channels" が含まれるけどいいや
       })
     })

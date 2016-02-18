@@ -1,19 +1,19 @@
-var App = require('./app');
-var controller = App.controller;
+let App = require('./app');
+let controller = App.controller;
 
-var Storage = {
+let Storage = {
 
-  _fetchChannelsData: function () {
-    return new Promise(function (resolve, reject) {
-      controller.storage.teams.get("channels", function(err, data) {
+  _fetchChannelsData: () => {
+    return new Promise((resolve, reject) => {
+      controller.storage.teams.get("channels", (err, data) => {
         resolve(data);
       })
     })
   },
 
-  _fetchMemories: function (userId) {
-    return new Promise(function (resolve, reject) {
-      controller.storage.users.get(userId, function(err, data) {
+  _fetchMemories: (userId) => {
+    return new Promise((resolve, reject) => {
+      controller.storage.users.get(userId, (err, data) => {
         resolve(data);
       })
     })

@@ -1,14 +1,14 @@
-var App = require('./app');
-var controller = App.controller;
-var slack = require('./slack');
-var storage = require('./storage');
+let App = require('./app');
+let controller = App.controller;
+let slack = require('./slack');
+let storage = require('./storage');
 
 require('./twitter');
 
-controller.hears(['覚えて'], 'direct_mention,mention', function(bot, message) {
-  var pureText = message.text.replace(/覚えて\s/, "")
-  var obj = {id: message.user, memories: pureText}
-  controller.storage.users.save(obj, function (err) {
+controller.hears(['覚えて'], 'direct_mention,mention', (bot, message) => {
+  let pureText = message.text.replace(/覚えて\s/, "")
+  let obj = {id: message.user, memories: pureText}
+  controller.storage.users.save(obj, (err) => {
     if (!err) {
       bot.reply(message, "覚えたよ");
     } else {
@@ -17,8 +17,8 @@ controller.hears(['覚えて'], 'direct_mention,mention', function(bot, message)
   })
 })
 
-controller.hears(['思い出して'], 'direct_mention,mention', function(bot, message) {
-  storage._fetchMemories(message.user).then(function (data) {
+controller.hears(['思い出して'], 'direct_mention,mention', (bot, message) => {
+  storage._fetchMemories(message.user).then((data) => {
     bot.reply(message, "思い出したよ");
     bot.reply(message, data.memories);
   })
