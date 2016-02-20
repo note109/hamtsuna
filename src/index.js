@@ -5,21 +5,24 @@ let storage = require('./storage');
 
 require('./twitter');
 
-controller.hears(['覚えて'], 'direct_mention,mention', (bot, message) => {
-  let pureText = message.text.replace(/覚えて\s/, "")
-  let obj = {id: message.user, memories: pureText}
-  controller.storage.users.save(obj, (err) => {
-    if (!err) {
-      bot.reply(message, "覚えたよ");
-    } else {
-      console.log(err)
-    }
-  })
-})
+controller.hears(['^覚えて$'], ['direct_mention', 'mention', 'ambient'], (bot, message) => {
+  bot.startConversation(message, (err, convo) => {
+    convo.ask('何を覚える？', (response, convo) => {
+      let saveObj = {id: response.user, memories: response.text}
+      controller.storage.users.save(saveObj, (err) => {
+        if (!err) {
+          convo.say("覚えたよ");
+        } else {
+          convo.say("エラー");
+        }
+        convo.next();
+      })
+    });
+  });
+});
 
-controller.hears(['思い出して'], 'direct_mention,mention', (bot, message) => {
+controller.hears(['^思い出して$'], ['direct_mention', 'mention', 'ambient'], (bot, message) => {
   storage._fetchMemories(message.user).then((data) => {
-    bot.reply(message, "思い出したよ");
     bot.reply(message, data.memories);
   })
 })
