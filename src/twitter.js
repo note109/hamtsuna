@@ -11,6 +11,8 @@ let T = new Twit({
 })
 let STATUSES = {}
 
+// 会話
+
 controller.hears([''], 'direct_mention, mention', (bot, message) => {
   let tweet = PRIVACY.REPLY_TO + " " + message.text;
   T.post('statuses/update', { status: tweet }, (err, data, response) => {
@@ -35,3 +37,19 @@ stream.on('tweet', (tweet) => {
     }
   );
 })
+
+// レシピ
+
+controller.hears(['^:rice_ball:$'], ['direct_mention', 'mention', 'ambient'], (bot, message) => {
+  T.get('statuses/user_timeline', { screen_name: 'm_kyounoryouri', count: 200 }, (err, data, response) => {
+    for (let n of [0, 1, 2]) {
+      let index = Math.floor(Math.random() * 199)
+      bot.say(
+        {
+          text: `https://twitter.com/m_kyounoryouri/status/${data[index].id_str}`,
+          channel: message.channel
+        }
+      );
+    }
+  })
+});

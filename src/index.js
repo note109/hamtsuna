@@ -4,6 +4,8 @@ let slack = require('./slack');
 let storage = require('./storage');
 
 require('./twitter');
+console.log("おはもに")
+// 記憶
 
 controller.hears(['^覚えて$'], ['direct_mention', 'mention', 'ambient'], (bot, message) => {
   bot.startConversation(message, (err, convo) => {
