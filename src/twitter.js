@@ -1,33 +1,33 @@
-var App = require('./app');
-var controller = App.controller;
-var bot = App.bot;
-var Twit = require('twit')
-var PRIVACY = JSON.parse(process.env.PRIVACY) || require('../config/privacy.json');
-var T = new Twit({
+let App = require('./app');
+let controller = App.controller;
+let bot = App.bot;
+let Twit = require('twit');
+let PRIVACY = process.env.PRIVACY ? JSON.parse(process.env.PRIVACY) : require('../config/privacy.json');
+let T = new Twit({
   consumer_key:        process.env.CONSUMER_KEY,
   consumer_secret:     process.env.CONSUMER_SECRET,
   access_token:        process.env.ACCESS_TOKEN,
   access_token_secret: process.env.ACCESS_TOKEN_SECRET
 })
-var STATUSES = {}
+let STATUSES = {}
 
-controller.hears([''], 'direct_mention, mention', function(bot, message) {
-  var tweet = PRIVACY.REPLY_TO + " " + message.text;
-  T.post('statuses/update', { status: tweet }, function(err, data, response) {
+controller.hears([''], 'direct_mention, mention', (bot, message) => {
+  let tweet = PRIVACY.REPLY_TO + " " + message.text;
+  T.post('statuses/update', { status: tweet }, (err, data, response) => {
     STATUSES[data.id_str] = message.channel
   })
 })
 
-var stream = T.stream('user')
+let stream = T.stream('user')
 
-stream.on('tweet', function (tweet) {
+stream.on('tweet', (tweet) => {
   if (!STATUSES[tweet.in_reply_to_status_id_str]) {
     return;
   }
-  var channelId = STATUSES[tweet.in_reply_to_status_id_str];
+  let channelId = STATUSES[tweet.in_reply_to_status_id_str];
   STATUSES[tweet.in_reply_to_status_id_str] = null;
 
-  var pureReplyText = tweet.text.replace(/@notebot109\s/, "")
+  let pureReplyText = tweet.text.replace(/@notebot109\s/, "")
   bot.say(
     {
       text: pureReplyText,
