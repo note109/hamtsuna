@@ -1,4 +1,6 @@
-require('./initialize');
+if (!process.env.SETTING_BOTKIT_TOKEN) {
+  require('./initialize');
+}
 
 let Botkit = require('./botkit');
 let controller = Botkit.controller;
