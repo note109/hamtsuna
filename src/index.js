@@ -1,8 +1,11 @@
+require('./initialize');
+
 let App = require('./app');
 let controller = App.controller;
 let slack = require('./slack');
 let storage = require('./storage');
 
+require('./wunderlist');
 require('./twitter');
 console.log("おはもに")
 // 記憶
