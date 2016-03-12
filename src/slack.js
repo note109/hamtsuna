@@ -1,3 +1,4 @@
+// TODO: Appじゃなくす
 let App = require('./botkit');
 let bot = App.bot;
 let controller = App.controller;
