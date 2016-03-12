@@ -44,6 +44,7 @@ controller.hears(['^[W|w]under[L|l]ist$', '^ワンダーリスト$'], ['direct_m
       let list = await Wunderlist.findList("#wish") // TODO 他のリストにも対応
       let tasks = response.text.split(/[、|,\s*|\.|\s|\n]/)
       let result = "";
+      // TODO: 並列処理にできそう
       for (let task of tasks) {
         let createdTask = await Wunderlist.createTask(list.id, task)
         if (createdTask.title === task) {
