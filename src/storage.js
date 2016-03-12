@@ -1,6 +1,5 @@
-// TODO: Appじゃなくす
-let App = require('./botkit');
-let controller = App.controller;
+let Botkit = require('./botkit');
+let controller = Botkit.controller;
 
 let Storage = {
 

@@ -1,7 +1,6 @@
-// TODO Appじゃなくす
-let App = require('./botkit');
-let controller = App.controller;
-let bot = App.bot;
+let Botkit = require('./botkit');
+let controller = Botkit.controller;
+let bot = Botkit.bot;
 let Twit = require('twit');
 let PRIVACY = process.env.PRIVACY ? JSON.parse(process.env.PRIVACY) : require('../config/privacy.json');
 let T = new Twit({
