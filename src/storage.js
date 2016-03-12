@@ -1,4 +1,4 @@
-let App = require('./app');
+let App = require('./botkit');
 let controller = App.controller;
 
 let Storage = {

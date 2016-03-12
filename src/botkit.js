@@ -1,4 +1,3 @@
-// TODO: app から botkit にファイル名変更
 let Botkit = require('botkit');
 
 if (!process.env.SETTING_BOTKIT_TOKEN) {
