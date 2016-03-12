@@ -14,11 +14,13 @@
   "license": "ISC",
   "dependencies": {
     "babel-cli": "^6.5.1",
+    "babel-polyfill": "^6.7.2",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-stage-3": "^6.5.0",
     "botkit": "git+https://github.com/howdyai/botkit.git",
     "redis": "^2.4.2",
-    "twit": "^2.2.2"
+    "twit": "^2.2.2",
+    "wunderlist": "git+https://github.com/wunderlist/wunderlist.js.git#lock-xmlhttprequest-version"
   },
   "engines": {
     "node": "4.2.1"

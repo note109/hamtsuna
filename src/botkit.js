@@ -1,12 +1,12 @@
 let Botkit = require('botkit');
 
-if (!process.env.TOKEN) {
+if (!process.env.SETTING_BOTKIT_TOKEN) {
   console.log('Error: Specify token in environment');
   process.exit(1);
 }
 
 let redisStorage = require('../node_modules/botkit/lib/storage/redis_storage.js')({
-  url: process.env.REDIS_URL
+  url: process.env.SETTING_BOTKIT_REDIS_URL
 });
 
 let controller = Botkit.slackbot({
@@ -16,7 +16,7 @@ let controller = Botkit.slackbot({
 });
 
 let bot = controller.spawn({
-  token: process.env.TOKEN
+  token: process.env.SETTING_BOTKIT_TOKEN
 }).startRTM((err) => {
   if (err) {
     throw new Error(err);

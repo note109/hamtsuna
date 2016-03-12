@@ -1,6 +1,6 @@
-let App = require('./app');
-let bot = App.bot;
-let controller = App.controller;
+let Botkit = require('./botkit');
+let bot = Botkit.bot;
+let controller = Botkit.controller;
 let storage = require('./storage');
 
 let Slack = {

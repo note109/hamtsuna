@@ -1,5 +1,5 @@
-let App = require('./app');
-let controller = App.controller;
+let Botkit = require('./botkit');
+let controller = Botkit.controller;
 
 let Storage = {
 

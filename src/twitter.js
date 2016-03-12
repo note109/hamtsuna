@@ -1,13 +1,13 @@
-let App = require('./app');
-let controller = App.controller;
-let bot = App.bot;
+let Botkit = require('./botkit');
+let controller = Botkit.controller;
+let bot = Botkit.bot;
 let Twit = require('twit');
 let PRIVACY = process.env.PRIVACY ? JSON.parse(process.env.PRIVACY) : require('../config/privacy.json');
 let T = new Twit({
-  consumer_key:        process.env.CONSUMER_KEY,
-  consumer_secret:     process.env.CONSUMER_SECRET,
-  access_token:        process.env.ACCESS_TOKEN,
-  access_token_secret: process.env.ACCESS_TOKEN_SECRET
+  consumer_key:        process.env.SETTING_TWITTER_CONSUMER_KEY,
+  consumer_secret:     process.env.SETTING_TWITTER_CONSUMER_SECRET,
+  access_token:        process.env.SETTING_TWITTER_ACCESS_TOKEN,
+  access_token_secret: process.env.SETTING_TWITTER_ACCESS_TOKEN_SECRET
 })
 let STATUSES = {}
 
