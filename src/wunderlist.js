@@ -34,6 +34,7 @@ let Wunderlist = class {
     return result;
   }
 
+  // TODO: redisも使う
   static fetchList() {
     return new Promise((resolve, reject) => {
       wunderlistsdk.http.lists.all().done((lists) => {
@@ -45,3 +46,5 @@ let Wunderlist = class {
   }
 
 }
+
+module.exports = Wunderlist;
