@@ -4,7 +4,8 @@
   "description": "slack bot",
   "main": "./src/index.js",
   "scripts": {
-    "start": "./node_modules/.bin/babel-node ./src/index.js"
+    "start": "./node_modules/.bin/babel-node ./src/index.js",
+    "debug": "./node_modules/.bin/babel-node debug ./src/index.js"
   },
   "repository": {
     "type": "git",

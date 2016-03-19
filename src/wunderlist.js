@@ -46,3 +46,5 @@ let Wunderlist = class {
   }
 
 }
+
+module.exports = Wunderlist;
