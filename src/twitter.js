@@ -15,6 +15,7 @@ let STATUSES = {}
 
 controller.hears([''], 'direct_mention, mention', (bot, message) => {
   let tweet = PRIVACY.REPLY_TO + " " + message.text;
+  tweet = tweet.replace(new RegExp(PRIVACY.BOT_NAME, "gim"), PRIVACY.AI_NAME);
   T.post('statuses/update', { status: tweet }, (err, data, response) => {
     STATUSES[data.id_str] = message.channel
   })
