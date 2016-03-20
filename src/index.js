@@ -17,6 +17,8 @@ let Twitter = require('./twitter');
 let STATUSES = {}
 let stream = Twitter.stream('user', {track: '@notebot109'})
 
+require('./cron')
+
 console.log('おはもに')
 
 // ---
