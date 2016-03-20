@@ -85,9 +85,9 @@ controller.hears(['^[W|w]under[L|l]ist$', '^ワンダーリスト$'], ['direct_m
 // ---
 controller.hears([''], 'direct_mention, mention', (bot, message) => {
   let tweet = PRIVACY.REPLY_TO + " " + message.text;
+  tweet = tweet.replace(new RegExp(PRIVACY.BOT_NAME, "gim"), PRIVACY.AI_NAME);
   Twitter.post('statuses/update', { status: tweet }, (err, data, response) => {
     STATUSES[data.id_str] = message.channel
-    console.log(STATUSES)
   })
 })
 
