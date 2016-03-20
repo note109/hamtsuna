@@ -10,3 +10,5 @@
 
 `$ npm run debug`  
 http://nodejs.jp/nodejs.org_ja/api/debugger.html
+
+test Channel ID = `C0CP40NAH`
