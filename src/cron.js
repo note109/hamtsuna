@@ -4,7 +4,9 @@ let Botkit = require('./botkit');
 let controller = Botkit.controller;
 let bot = Botkit.bot;
 
-let job = new CronJob({
+let Wunderlist = require('./wunderlist');
+
+let morning = new CronJob({
   cronTime: '00 00 09 * * *',
   onTick: () => {
     bot.say(
@@ -17,5 +19,13 @@ let job = new CronJob({
   start: false,
   timeZone: 'Asia/Tokyo'
 });
+morning.start();
 
-job.start();
+let reminder = new CronJob({
+  cronTime: '00 00 00,03,06,09,12,15,18,21 * * *',
+  onTick: Wunderlist.remindTasks,
+  start: false,
+  timeZone: 'Asia/Tokyo'
+});
+reminder.start();
+
