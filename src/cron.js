@@ -6,20 +6,30 @@ let bot = Botkit.bot;
 
 let Wunderlist = require('./wunderlist');
 
-let morning = new CronJob({
-  cronTime: '00 00 09 * * *',
-  onTick: () => {
-    bot.say(
-      {
+let getRandomInt = (min, max) => {
+  return Math.floor( Math.random() * (max - min + 1) ) + min;
+}
+
+let setMorningAlerm; // let しておかないと onComplete で再帰的に呼び出せない。。なぜ。。
+setMorningAlerm = () => {
+  let cronTime  = `${getRandomInt(0,59)} ${getRandomInt(0,30)} ${getRandomInt(8,9)} * * *`;
+  let wakeUpJob = new CronJob({
+    cronTime: cronTime,
+    onTick: () => {
+      bot.say({
         text: 'おはもに',
         channel: 'C0RN7K5LK'
-      }
-    );
-  },
-  start: false,
-  timeZone: 'Asia/Tokyo'
-});
-morning.start();
+      });
+      wakeUpJob.stop();
+    },
+    onComplete: () => {
+      setMorningAlerm()
+    },
+    start: true,
+    timeZone: 'Asia/Tokyo'
+  });
+}
+setMorningAlerm();
 
 let reminder = new CronJob({
   cronTime: '00 00 00,03,06,09,12,15,18,21 * * *',
