@@ -12,7 +12,16 @@ let getRandomInt = (min, max) => {
 
 let setMorningAlerm; // let しておかないと onComplete で再帰的に呼び出せない。。なぜ。。
 setMorningAlerm = () => {
-  let cronTime  = `${getRandomInt(0,59)} ${getRandomInt(0,30)} ${getRandomInt(8,9)} * * *`;
+  let hour   = getRandomInt(8, 9);
+  let minute;
+  let second = getRandomInt(0,59);
+  if (hour === 8) {
+    minute = getRandomInt(30, 59);
+  } else if (hour === 9) {
+    minute = getRandomInt(0, 9);
+  }
+  let cronTime  = `${second} ${minute} ${hour} * * *`;
+
   let wakeUpJob = new CronJob({
     cronTime: cronTime,
     onTick: () => {
@@ -23,7 +32,9 @@ setMorningAlerm = () => {
       wakeUpJob.stop();
     },
     onComplete: () => {
-      setMorningAlerm()
+      setTimeout(() => {
+        setMorningAlerm()
+      }, 1000 * 60 * 60)
     },
     start: true,
     timeZone: 'Asia/Tokyo'
@@ -38,4 +49,3 @@ let reminder = new CronJob({
   timeZone: 'Asia/Tokyo'
 });
 reminder.start();
-
